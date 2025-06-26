@@ -9,116 +9,121 @@
 
 /* Gulf Coast Towing Custom Styles */
 @layer base {
-  :root {
-    --gct-orange-400: #fb923c;
-    --gct-orange-500: #f97316;
-    --gct-orange-600: #ea580c;
-  }
+    :root {
+        --gct-orange-400: #fb923c;
+        --gct-orange-500: #f97316;
+        --gct-orange-600: #ea580c;
+    }
 }
 
 @layer components {
-  /* Liquid Glass Effects */
-  .glass-nav {
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
+    /* Liquid Glass Effects */
+    .glass-nav {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
 
-  .glass-card {
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
+    .glass-card {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
 
-  .glass-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  }
+    .glass-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
 
-  .glass-button {
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-  }
+    .glass-button {
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
 
-  .glass-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s;
-  }
+    .glass-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s;
+    }
 
-  .glass-button:hover::before {
-    left: 100%;
-  }
+    .glass-button:hover::before {
+        left: 100%;
+    }
 
-  /* GCT Orange Gradient */
-  .text-gradient-gct {
-    background: linear-gradient(135deg, var(--gct-orange-400), var(--gct-orange-600));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+    /* GCT Orange Gradient */
+    .text-gradient-gct {
+        background: linear-gradient(135deg, var(--gct-orange-400), var(--gct-orange-600));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
 
-  .bg-gradient-gct {
-    background: linear-gradient(135deg, var(--gct-orange-400), var(--gct-orange-600));
-  }
+    .bg-gradient-gct {
+        background: linear-gradient(135deg, var(--gct-orange-400), var(--gct-orange-600));
+    }
 
-  /* Dark mode overrides */
-  .dark .glass-nav {
-    background: rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
+    /* Dark mode overrides */
+    .dark .glass-nav {
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-  .dark .glass-card {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
+    .dark .glass-card {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-  .dark .glass-card:hover {
-    background: rgba(0, 0, 0, 0.3);
-  }
+    .dark .glass-card:hover {
+        background: rgba(0, 0, 0, 0.3);
+    }
 
-  /* Smooth animations */
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
+    /* Smooth animations */
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
 
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
 
-  ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-  }
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
 
-  ::-webkit-scrollbar-thumb {
-    background: var(--gct-orange-500);
-    border-radius: 4px;
-  }
+    ::-webkit-scrollbar-thumb {
+        background: var(--gct-orange-500);
+        border-radius: 4px;
+    }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--gct-orange-600);
-  }
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--gct-orange-600);
+    }
 }
 
 @theme inline {
