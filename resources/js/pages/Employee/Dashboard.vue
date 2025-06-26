@@ -32,20 +32,16 @@
       <!-- Navigation Tabs -->
       <div class="mb-8">
         <div class="glass-card bg-white/5 dark:bg-black/5 backdrop-blur-lg border border-white/10 dark:border-white/5 rounded-2xl p-2">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">            <Link :href="route('employee.dashboard')" 
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <Link :href="route('employee.dashboard')" 
                   :class="[page.component === 'Employee/Dashboard' ? 'bg-orange-500/30 text-orange-400' : 'text-white/80 hover:text-white hover:bg-white/10']"
                   class="px-4 py-3 rounded-lg transition-all duration-300 text-center font-medium">
               Dashboard
             </Link>
-            <Link :href="route('employee.orders')" 
-                  :class="[page.component === 'Employee/Orders' ? 'bg-orange-500/30 text-orange-400' : 'text-white/80 hover:text-white hover:bg-white/10']"
+            <Link :href="route('employee.dispatch')" 
+                  :class="[page.component === 'Employee/Dispatch' ? 'bg-blue-500/30 text-blue-400' : 'text-white/80 hover:text-white hover:bg-white/10']"
                   class="px-4 py-3 rounded-lg transition-all duration-300 text-center font-medium">
-              Aufträge
-            </Link>
-            <Link :href="route('employee.vehicles')" 
-                  :class="[page.component === 'Employee/Vehicles' ? 'bg-orange-500/30 text-orange-400' : 'text-white/80 hover:text-white hover:bg-white/10']"
-                  class="px-4 py-3 rounded-lg transition-all duration-300 text-center font-medium">
-              Fahrzeuge
+              Leitstelle
             </Link>
           </div>
         </div>

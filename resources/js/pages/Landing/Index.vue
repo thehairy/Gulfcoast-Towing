@@ -15,10 +15,10 @@
               class="text-white/80 hover:text-orange-400 transition-colors duration-300">Dienstleistungen</a>
             <a href="#prices" class="text-white/80 hover:text-orange-400 transition-colors duration-300">Preise</a>
             <a href="#contact" class="text-white/80 hover:text-orange-400 transition-colors duration-300">Kontakt</a>
-            <Link :href="route('login')"
+            <button @click="loginModalOpen = true"
               class="glass-button bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 border border-orange-400/30 px-4 py-2 rounded-lg transition-all duration-300">
             Anmelden
-            </Link>
+            </button>
           </div>
 
           <!-- Mobile menu button -->
@@ -37,18 +37,57 @@
               class="text-white/80 hover:text-orange-400 transition-colors duration-300">Dienstleistungen</a>
             <a href="#prices" class="text-white/80 hover:text-orange-400 transition-colors duration-300">Preise</a>
             <a href="#contact" class="text-white/80 hover:text-orange-400 transition-colors duration-300">Kontakt</a>
-            <Link :href="route('employee.login')"
+            <Link :href="route('steam.redirect', { type: 'employee' })"
               class="glass-button bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border border-blue-400/30 px-4 py-2 rounded-lg transition-all duration-300 text-center">
             Mitarbeiter
             </Link>
-            <Link :href="route('login')"
+            <button @click="loginModalOpen = true"
               class="glass-button bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 border border-orange-400/30 px-4 py-2 rounded-lg transition-all duration-300 text-center">
             Anmelden
-            </Link>
+            </button>
           </div>
         </div>
       </div>
     </nav>
+
+    <!-- Login Modal -->
+    <div v-if="loginModalOpen" class="fixed inset-0 z-50 flex items-center justify-center">
+      <!-- Modal Background -->
+      <div @click="loginModalOpen = false" 
+           class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+      
+      <!-- Modal Content -->
+      <div class="relative z-10 glass-card bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-white/20 dark:border-white/10 rounded-2xl p-8 mx-4 max-w-md w-full">
+        <!-- Close Button -->
+        <button @click="loginModalOpen = false" 
+                class="absolute top-4 right-4 text-white/60 hover:text-white transition-colors cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+
+        <!-- Modal Header -->
+        <h3 class="text-2xl font-bold text-white mb-6 text-center">Anmelden</h3>
+        <p class="text-white/80 text-center mb-8">Wählen Sie Ihr Portal:</p>
+
+        <!-- Login Options -->
+        <div class="space-y-4">
+          <a :href="route('steam.redirect', { type: 'customer' })"
+             class="glass-button bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 border border-orange-400/30 px-6 py-3 rounded-lg transition-all duration-300 block text-center font-semibold">
+            Kundenportal
+          </a>
+          <a :href="route('steam.redirect', { type: 'employee' })"
+             class="glass-button bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border border-blue-400/30 px-6 py-3 rounded-lg transition-all duration-300 block text-center font-semibold">
+            Mitarbeiterportal
+          </a>
+        </div>
+
+        <!-- Info Text -->
+        <p class="text-white/60 text-sm text-center mt-6">
+          Melden Sie sich mit Ihrem Steam Account an
+        </p>
+      </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="relative py-20 px-4 sm:px-6 lg:px-8">
@@ -201,14 +240,14 @@
             class="glass-card bg-white/5 dark:bg-black/5 backdrop-blur-lg border border-white/10 dark:border-white/5 rounded-2xl p-8">
             <h3 class="text-2xl font-bold text-white mb-6">Für Kunden & Mitarbeiter</h3>
             <div class="space-y-4">
-              <Link :href="route('login')"
+              <a :href="route('steam.redirect', { type: 'customer' })"
                 class="glass-button bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 border border-orange-400/30 px-6 py-3 rounded-lg transition-all duration-300 block text-center">
               Kundenportal
-              </Link>
-              <Link :href="route('employee.login')"
+              </a>
+              <a :href="route('steam.redirect', { type: 'employee' })"
                 class="glass-button bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border border-white/20 px-6 py-3 rounded-lg transition-all duration-300 block text-center">
               Mitarbeiterportal
-              </Link>
+              </a>
               <p class="text-white/80 text-sm text-center mt-4">
                 Melden Sie sich mit Ihrem Steam Account an, um auf die Portale zuzugreifen.
               </p>
@@ -238,6 +277,7 @@ import { ref } from 'vue';
 import { TruckIcon, WrenchIcon, ShieldExclamationIcon, CogIcon, QueueListIcon } from '@heroicons/vue/24/outline';
 
 const mobileMenuOpen = ref(false);
+const loginModalOpen = ref(false);
 
 const services = [
   {

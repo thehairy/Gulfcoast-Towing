@@ -14,10 +14,12 @@ class RankSeeder extends Seeder
     public function run(): void
     {
         $ranks = [
-            ['id' => 1, 'name' => 'Trainee'],
-            ['id' => 2, 'name' => 'Employee'],
-            ['id' => 3, 'name' => 'Ausbilder'],
-            ['id' => 4, 'name' => 'Chief Executive Officer'],
+            ['id' => 1, 'name' => 'Recovery Associate'],
+            ['id' => 2, 'name' => 'Recovery Specialist'],
+            ['id' => 3, 'name' => 'Senior Recovery Specialist'],
+            ['id' => 4, 'name' => 'Training & Development Manager'],
+            ['id' => 5, 'name' => 'Director of Operations'],
+            ['id' => 6, 'name' => 'Chief Executive Officer'],
         ];
 
         foreach ($ranks as $rank) {

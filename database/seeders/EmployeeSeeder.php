@@ -18,7 +18,14 @@ class EmployeeSeeder extends Seeder
             'first_name' => 'Sam',
             'last_name' => 'White',
             'phone_number' => '0659177288',
-            'rank_id' => 4,
+            'rank_id' => 6,
+        ]);
+        Employee::create([
+            'steam_id' => '76561198363089682',
+            'first_name' => 'Mike',
+            'last_name' => 'Resse',
+            'phone_number' => '0659177233',
+            'rank_id' => 5,
         ]);
     }
 }

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\SteamController;
 use App\Http\Controllers\Employee\DashboardController;
+use App\Http\Controllers\Employee\DispatchController;
+use App\Http\Controllers\Customer\DashboardController as CustomerDashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,25 +16,20 @@ Route::get('/', function () {
 Route::get('/auth/steam', [SteamController::class, 'redirect'])->name('steam.redirect');
 Route::get('/auth/steam/callback', [SteamController::class, 'callback'])->name('steam.callback');
 
-// Employee Login
-Route::get('/employee/login', [DashboardController::class, 'login'])->name('employee.login');
-Route::post('/employee/logout', [DashboardController::class, 'logout'])->name('employee.logout');
+// Employee Logout
+Route::post('/mitarbeiter/logout', [DashboardController::class, 'logout'])->name('employee.logout');
 
 // Mitarbeiterportal - Nur für Mitarbeiter mit Steam-Authentifizierung
 Route::prefix('mitarbeiter')->name('employee.')->middleware(['employee.auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    
-    Route::get('/auftraege', function () {
-        return Inertia::render('Employee/Orders', [
-            'employee' => session('employee')
-        ]);
-    })->name('orders');
-    
-    Route::get('/fahrzeuge', function () {
-        return Inertia::render('Employee/Vehicles', [
-            'employee' => session('employee')
-        ]);
-    })->name('vehicles');
+
+    // Leitstelle/Dispatch
+    Route::get('/leitstelle', [DispatchController::class, 'index'])->name('dispatch');
+    Route::post('/leitstelle/fahrzeug-zuweisen', [DispatchController::class, 'assignVehicle'])->name('dispatch.assign');
+    Route::post('/leitstelle/fahrzeug-zurueckgeben', [DispatchController::class, 'returnVehicle'])->name('dispatch.return');
+    Route::post('/leitstelle/fahrzeug-hinzufuegen', [DispatchController::class, 'addVehicle'])->name('dispatch.add-vehicle');
+    Route::post('/leitstelle/dienststatus', [DispatchController::class, 'updateDutyStatus'])->name('dispatch.duty-status');
+    Route::post('/leitstelle/leitstelle-toggle', [DispatchController::class, 'toggleDispatcher'])->name('dispatch.toggle');
 });
 
 // Kundenportal - Für alle registrierten Spieler (Steam oder normale Registrierung)

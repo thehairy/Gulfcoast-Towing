@@ -29,6 +29,6 @@ class DashboardController extends Controller
     public function logout()
     {
         session()->forget(['employee', 'employee_authenticated']);
-        return redirect()->route('employee.login');
+        return redirect()->route('home');
     }
 }
