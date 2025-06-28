@@ -14,7 +14,7 @@
                         <a href="#contact" class="text-white/80 transition-colors duration-300 hover:text-orange-400">Kontakt</a>
                         <button
                             @click="loginModalOpen = true"
-                            class="glass-button rounded-lg border border-orange-400/30 bg-orange-500/20 px-4 py-2 text-orange-400 transition-all duration-300 hover:bg-orange-500/30"
+                            class="disabled glass-button rounded-lg border border-orange-400/30 bg-orange-500/20 px-4 py-2 text-orange-400 transition-all duration-300 hover:bg-orange-500/30"
                         >
                             Anmelden
                         </button>
@@ -81,10 +81,14 @@
                         {{ customerPortalHovered ? 'Work in Progress' : 'Kundenportal' }}
                     </a>
                     <a
+                        @mouseenter="employeePortalHovered = true"
+                        @mouseleave="employeePortalHovered = false"
+                        @click.prevent
                         :href="route('steam.redirect', { type: 'employee' })"
-                        class="glass-button block rounded-lg border border-blue-400/30 bg-blue-500/20 px-6 py-3 text-center font-semibold text-blue-400 transition-all duration-300 hover:bg-blue-500/30"
+                        class="work-in-progress glass-button block rounded-lg border border-blue-400/30 bg-blue-500/20 px-6 py-3 text-center font-semibold text-blue-400 transition-all duration-300 hover:bg-blue-500/30"
                     >
-                        Mitarbeiterportal
+                        
+                        {{ employeePortalHovered ? 'Work in Progress' : 'Mitarbeiterportal' }}
                     </a>
                 </div>
 
@@ -278,10 +282,13 @@
                                 {{ customerPortalHovered ? 'Work in Progress' : 'Kundenportal' }}
                             </a>
                             <a
+                                @mouseenter="employeePortalHovered = true"
+                                @mouseleave="employeePortalHovered = false"
+                                @click.prevent
                                 :href="route('steam.redirect', { type: 'employee' })"
-                                class="glass-button block rounded-lg border border-white/20 bg-blue-500/20 px-6 py-3 text-center text-blue-400 transition-all duration-300 hover:bg-blue-500/30"
+                                class="work-in-progress glass-button block rounded-lg border border-white/20 bg-blue-500/20 px-6 py-3 text-center text-blue-400 transition-all duration-300 hover:bg-blue-500/30"
                             >
-                                Mitarbeiterportal
+                                {{ employeePortalHovered ? 'Work in Progress' : 'Mitarbeiterportal' }}
                             </a>
                             <p class="mt-4 text-center text-sm text-white/80">
                                 Melden Sie sich mit Ihrem Steam Account an, um auf die Portale zuzugreifen.
@@ -312,6 +319,7 @@ import { CogIcon, QueueListIcon, ShieldExclamationIcon, TruckIcon, WrenchIcon } 
 const mobileMenuOpen = ref(false);
 const loginModalOpen = ref(false);
 const customerPortalHovered = ref(false);
+const employeePortalHovered = ref(false);
 
 const services = [
     {
