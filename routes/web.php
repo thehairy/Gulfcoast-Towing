@@ -12,10 +12,6 @@ Route::get('/', function () {
     return Inertia::render('Landing/Index');
 })->name('home');
 
-// Steam Authentication Routes
-Route::get('/auth/steam', [SteamController::class, 'redirect'])->name('steam.redirect');
-Route::get('/auth/steam/callback', [SteamController::class, 'callback'])->name('steam.callback');
-
 // Employee Logout
 Route::post('/mitarbeiter/logout', [DashboardController::class, 'logout'])->name('employee.logout');
 

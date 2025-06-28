@@ -35,12 +35,6 @@
                         <a href="#services" class="text-white/80 transition-colors duration-300 hover:text-orange-400">Dienstleistungen</a>
                         <a href="#prices" class="text-white/80 transition-colors duration-300 hover:text-orange-400">Preise</a>
                         <a href="#contact" class="text-white/80 transition-colors duration-300 hover:text-orange-400">Kontakt</a>
-                        <Link
-                            :href="route('steam.redirect', { type: 'employee' })"
-                            class="glass-button rounded-lg border border-blue-400/30 bg-blue-500/20 px-4 py-2 text-center text-blue-400 transition-all duration-300 hover:bg-blue-500/30"
-                        >
-                            Mitarbeiter
-                        </Link>
                         <button
                             @click="loginModalOpen = true"
                             class="glass-button rounded-lg border border-orange-400/30 bg-orange-500/20 px-4 py-2 text-center text-orange-400 transition-all duration-300 hover:bg-orange-500/30"
@@ -79,9 +73,12 @@
                 <div class="space-y-4">
                     <a
                         :href="route('steam.redirect', { type: 'customer' })"
-                        class="glass-button block rounded-lg border border-orange-400/30 bg-orange-500/20 px-6 py-3 text-center font-semibold text-orange-400 transition-all duration-300 hover:bg-orange-500/30"
+                        @mouseenter="customerPortalHovered = true"
+                        @mouseleave="customerPortalHovered = false"
+                        @click.prevent
+                        class="work-in-progress glass-button block rounded-lg border border-orange-400/30 bg-orange-500/20 px-6 py-3 text-center font-semibold text-orange-400 transition-all duration-300 hover:bg-orange-500/30"
                     >
-                        Kundenportal
+                        {{ customerPortalHovered ? 'Work in Progress' : 'Kundenportal' }}
                     </a>
                     <a
                         :href="route('steam.redirect', { type: 'employee' })"
@@ -107,10 +104,14 @@
                             Gulfcoast Towing
                         </span>
                     </h1>
-                    <p class="mx-auto mb-8 max-w-3xl text-xl text-white/80 md:text-2xl">
-                        Ihr zuverlässiger Partner für Reparaturen & Abschleppdienste in Gulfcoast County. 24/7 Service, professionelle Ausrüstung und
+                    <p class="mx-auto max-w-3xl text-xl text-white/80 md:text-2xl">
+                        Ihr zuverlässiger Partner für Reparaturen & Co in Gulfcoast County.
+                    </p>
+                    <p class="mx-auto mb-4 max-w-3xl text-xl text-white/80 md:text-2xl">
+                        24/7 Service, professionelle Ausrüstung und
                         erfahrene Mitarbeiter.
                     </p>
+                    <p class="mx-auto mb-8 max-w-3xl text-xl text-white/80 md:text-2xl">Nicht alle Helden tragen Uniform. Manche fahren Abschlepper.</p>
                     <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
                         <button
                             @click="scrollTo('#contact')"
@@ -241,7 +242,7 @@
                                 </div>
                                 <div>
                                     <p class="font-medium text-white">Hauptsitz</p>
-                                    <p class="text-white/80">TBD</p>
+                                    <p class="text-white/80">Northern Boulevard 17, 27070 West Pittston</p>
                                 </div>
                             </div>
 
@@ -257,8 +258,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="font-medium text-white">Öffnungszeiten</p>
-                                    <p class="text-white/80">24/7 Verfügbar</p>
+                                    <p class="font-medium text-white">Geschäftsführung</p>
+                                    <p class="text-white/80">Sam White</p>
                                 </div>
                             </div>
                         </div>
@@ -267,11 +268,14 @@
                     <div class="glass-card rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-lg dark:border-white/5 dark:bg-black/5">
                         <h3 class="mb-6 text-2xl font-bold text-white">Für Kunden & Mitarbeiter</h3>
                         <div class="space-y-4">
-                            <a
+                            <a 
+                                @mouseenter="customerPortalHovered = true"
+                                @mouseleave="customerPortalHovered = false"
+                                @click.prevent
                                 :href="route('steam.redirect', { type: 'customer' })"
-                                class="glass-button block rounded-lg border border-orange-400/30 bg-orange-500/20 px-6 py-3 text-center text-orange-400 transition-all duration-300 hover:bg-orange-500/30"
+                                class="work-in-progress glass-button block rounded-lg border border-orange-400/30 bg-orange-500/20 px-6 py-3 text-center text-orange-400 transition-all duration-300 hover:bg-orange-500/30"
                             >
-                                Kundenportal
+                                {{ customerPortalHovered ? 'Work in Progress' : 'Kundenportal' }}
                             </a>
                             <a
                                 :href="route('steam.redirect', { type: 'employee' })"
@@ -307,6 +311,7 @@ import { CogIcon, QueueListIcon, ShieldExclamationIcon, TruckIcon, WrenchIcon } 
 
 const mobileMenuOpen = ref(false);
 const loginModalOpen = ref(false);
+const customerPortalHovered = ref(false);
 
 const services = [
     {
@@ -418,6 +423,25 @@ const scrollTo = (selector: string) => {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     cursor: pointer;
+}
+
+.glass-button.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.glass-button.work-in-progress {
+    cursor: not-allowed;
+    opacity: 0.6;
+    filter: grayscale(0.3);
+}
+
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.6;
+    filter: grayscale(0.3);
 }
 
 .text-gradient {

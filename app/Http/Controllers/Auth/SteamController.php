@@ -13,7 +13,7 @@ class SteamController extends Controller
 {
     public function redirect(Request $request)
     {
-        $type = $request->get('type', 'customer'); // 'customer' or 'employee'
+        $type = $request->get('type', 'employee'); // 'customer' or 'employee'
         
         // Simple Steam OpenID authentication
         $steamOpenId = 'https://steamcommunity.com/openid/login';
@@ -33,11 +33,11 @@ class SteamController extends Controller
 
     public function callback(Request $request)
     {
-        $type = $request->get('type', 'customer');
+        $type = $request->get('type', 'employee');
         
         // Validate OpenID response
         if (!$this->validateSteamLogin($request)) {
-            return redirect()->route($type === 'employee' ? 'employee.login' : 'login')
+            return redirect()->route($type === 'employee' ? 'employee.login' : 'home')
                 ->withErrors(['steam' => 'Steam authentication failed or was cancelled.']);
         }
 
@@ -45,7 +45,7 @@ class SteamController extends Controller
         $steamId = $this->extractSteamId($request->get('openid_claimed_id'));
         
         if (!$steamId) {
-            return redirect()->route($type === 'employee' ? 'employee.login' : 'login')
+            return redirect()->route($type === 'employee' ? 'employee.login' : 'home')
                 ->withErrors(['steam' => 'Could not retrieve Steam ID.']);
         }
 
