@@ -37,7 +37,7 @@ class SteamController extends Controller
         
         // Validate OpenID response
         if (!$this->validateSteamLogin($request)) {
-            return redirect()->route($type === 'employee' ? 'employee.login' : 'home')
+            return redirect()->route('home')
                 ->withErrors(['steam' => 'Steam authentication failed or was cancelled.']);
         }
 
@@ -45,7 +45,7 @@ class SteamController extends Controller
         $steamId = $this->extractSteamId($request->get('openid_claimed_id'));
         
         if (!$steamId) {
-            return redirect()->route($type === 'employee' ? 'employee.login' : 'home')
+            return redirect()->route('home')
                 ->withErrors(['steam' => 'Could not retrieve Steam ID.']);
         }
 
@@ -76,7 +76,7 @@ class SteamController extends Controller
         $employee = Employee::where('steam_id', $steamId)->with('rank')->first();
         
         if (!$employee) {
-            return redirect()->route('employee.login')->withErrors(['steam' => 'No employee found with this Steam ID.']);
+            return redirect()->route('home')->withErrors(['steam' => 'No employee found with this Steam ID.']);
         }
 
         // Store employee data in session
