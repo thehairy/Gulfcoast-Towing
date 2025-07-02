@@ -39,4 +39,8 @@ return [
         'api_key' => env('STEAM_API_KEY'),
     ],
 
+    'syd' => [
+        'api_key' => env('SYD_API_KEY'),
+    ],
+
 ];

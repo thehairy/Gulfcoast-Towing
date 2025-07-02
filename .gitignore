@@ -9,7 +9,6 @@
 
 # Laravel specific
 /bootstrap/compiled.php
-/bootstrap/cache
 Homestead.json
 Homestead.yaml
 auth.json
@@ -35,9 +34,9 @@ Thumbs.db
 /storage/*.key
 /storage/logs/*.log
 /storage/framework/cache/data
-/storage/framework/sessions
+/storage/framework/sessions/*
 /storage/framework/testing
-/storage/framework/views
+/storage/framework/views/*
 /storage/app/public
 
 # Cache and temporary files

@@ -18,7 +18,7 @@ class RankSeeder extends Seeder
             ['id' => 2, 'name' => 'Recovery Specialist'],
             ['id' => 3, 'name' => 'Senior Recovery Specialist'],
             ['id' => 4, 'name' => 'Training & Development Manager'],
-            ['id' => 5, 'name' => 'Director of Operations'],
+            ['id' => 5, 'name' => 'Chief Operating Officer'],
             ['id' => 6, 'name' => 'Chief Executive Officer'],
         ];
 

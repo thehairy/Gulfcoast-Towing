@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 
-class SYDController
+class SYDController extends Controller
 {
     static private $apiUrl = 'https://utils.switchyourdream.de/v1/';
     static private $allPlayersRoute = 'server/player/all';
@@ -13,7 +15,7 @@ class SYDController
 
     private function getApiKey()
     {
-        return env('SYD_API_KEY');
+        return config('services.syd.api_key');
     }
 
     private function doRequest($endpoint, $method = 'GET', $data = [], $useQueryParams = false)

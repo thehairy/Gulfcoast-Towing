@@ -15,10 +15,20 @@ class EmployeeAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!session('employee_authenticated') || !session('employee')) {
-            return redirect()->route('employee.login');
+        // Prüfe zuerst die Session-basierte Authentifizierung (bestehender Code)
+        if (session('employee_authenticated') && session('employee')) {
+            // Setze den Benutzer für den employee guard
+            auth()->guard('employee')->setUser(
+                \App\Models\Employee::find(session('employee')['id'])
+            );
+            return $next($request);
         }
 
-        return $next($request);
+        // Fallback: Prüfe den employee guard
+        if (auth()->guard('employee')->check()) {
+            return $next($request);
+        }
+
+        return redirect()->route('home')->with('error', 'Bitte melden Sie sich als Mitarbeiter an.');
     }
 }

@@ -15,7 +15,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Import towing employees daily at 3 AM
+        $schedule->command('employees:import-towing')
+                 ->daily()
+                 ->at('03:00')
+                 ->withoutOverlapping()
+                 ->runInBackground();
     }
 
     /**

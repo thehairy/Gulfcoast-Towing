@@ -79,11 +79,14 @@ class SteamController extends Controller
             return redirect()->route('home')->withErrors(['steam' => 'No employee found with this Steam ID.']);
         }
 
-        // Store employee data in session
+        // Store employee data in session (for backward compatibility)
         session([
-            'employee' => $employee,
+            'employee' => $employee->toArray(), // Convert to array to include rank
             'employee_authenticated' => true,
         ]);
+
+        // Also login using the employee guard
+        Auth::guard('employee')->login($employee);
 
         return redirect()->route('employee.dashboard');
     }
