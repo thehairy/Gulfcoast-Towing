@@ -1,11 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\SteamController;
 use App\Http\Controllers\Employee\DashboardController;
-use App\Http\Controllers\Employee\DispatchController;
-use App\Http\Controllers\Employee\ServiceRegulationsController;
 use App\Http\Controllers\Employee\EmployeeListController;
-use App\Http\Controllers\Customer\DashboardController as CustomerDashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,7 +20,6 @@ Route::prefix('mitarbeiter')->name('employee.')->middleware(['employee.auth'])->
 
 // Employee List Management - Jetzt über das Dashboard verfügbar
 Route::prefix('employee-list')->middleware(['employee.auth'])->group(function () {
-    Route::get('/', [EmployeeListController::class, 'index'])->name('employee.list');
     Route::put('/{employee}', [DashboardController::class, 'updateEmployee'])->name('employee.update');
     Route::post('/{employee}/training', [DashboardController::class, 'addTraining'])->name('employee.training.add');
     Route::delete('/{employee}/training/{training}', [DashboardController::class, 'removeTraining'])->name('employee.training.remove');
